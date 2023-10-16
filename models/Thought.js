@@ -13,9 +13,8 @@ const thoughtSchema = new mongoose.Schema({
         get: (date) => { return Date(date)
         }
     },
-    username: {
+    username: {//user that created this thought??
         type: String, 
-        unique: true, 
         required: [true, "Username required"], 
     },
     reactions: [{ref: 'Reaction'}],
