@@ -1,5 +1,6 @@
 //create user
 const User = require("../models/User");
+const Thought = require("../models/Thought")
 //get users to display make they're working
 
 //create one user
@@ -68,13 +69,20 @@ const updateSingleUser = async (req, res) => {
 //http://localhost:3001/api/users/{userId}
 const deleteSingleUser = async (req, res) => {
   try {
+
+    //delete the user thoughts
+    const findUser = await User.find({_id: req.params.userId});
+    if (!findUser) {
+        return res.status(404).json({ message: "No user with that ID" });
+      }
+    const userUsername = findUser[0].username;
+    const deleteAllUserThoughts = await Thought.deleteMany({username: userUsername})
+    
+    //delete the user
     const deleteUser = await User.findOneAndDelete({
       _id: req.params.userId,
     });
-    if (!deleteUser) {
-      return res.status(404).json({ message: "No user with that ID" });
-    }
-    res.status(200).json({
+      res.status(200).json({
       message: `User of id ${req.params.userId} deleted successfully`,
     });
   } catch (err) {
