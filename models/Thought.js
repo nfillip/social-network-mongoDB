@@ -11,7 +11,6 @@ const thoughtSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now,
-        //go back to this to test
         get: (date) => { return date.toString()
         }
     },

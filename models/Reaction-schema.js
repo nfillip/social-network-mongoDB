@@ -18,7 +18,6 @@ const reactionSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now,
-        //go back to this to test
         get: (date) => { return date.toString()
         }
     },
@@ -31,6 +30,5 @@ const reactionSchema = new Schema({
     id: false
 })
 
-// const Reaction = mongoose.model('Reaction', reactionSchema);
 
 module.exports = reactionSchema;
