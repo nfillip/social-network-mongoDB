@@ -88,7 +88,7 @@ const deleteSingleThought = async (req, res) => {
 };
 
 //create a reaction
-//http://localhost:3001/api/thoughts/:thoughtId/reactions/:reactionId
+//http://localhost:3001/api/thoughts/:thoughtId/reactions/
 const createReaction = async (req, res) => {
   try {
     const updateThoughtReaction = await Thought.findOneAndUpdate(

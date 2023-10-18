@@ -57,7 +57,7 @@ Github Profile: [https://github.com/nfillip](https://github.com/nfillip)
 
 ## Website
 Github Repo: [https://github.com/nfillip/social-network-mongoDB](https://github.com/nfillip/social-network-mongoDB)<br>
-Video Walk-Through: [https://drive.google.com/file/d/1566y919RTW5ukaMUxEH9IaVhHjxMj8WR/view](https://drive.google.com/file/d/1566y919RTW5ukaMUxEH9IaVhHjxMj8WR/view)
+Video Walk-Through: [https://drive.google.com/file/d/1yY9jyB2bjPx1Plj6MgUx6EVPcYGOKyGP/view](https://drive.google.com/file/d/1yY9jyB2bjPx1Plj6MgUx6EVPcYGOKyGP/view)
 ![Screenshot of VideoWalkthrough](./Assets/video-walkthrough.PNG)
 
 
