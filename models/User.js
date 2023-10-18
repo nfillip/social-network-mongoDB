@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+const {Schema, model} = require('mongoose');
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
     username: {
         type: String, 
         unique: true, 
@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
         type: String, 
         required: true, 
         unique: true, 
+        //potentially use match here if we need
         validate: {
             validator: function(v) {
                 return /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/.test(v);
@@ -18,10 +19,20 @@ const userSchema = new mongoose.Schema({
             message: "Need a real email address"
         }
     },
-    thoughts: [{type: mongoose.Schema.Types.ObjectId, ref: 'Thought'}],
-    friends: [{type: mongoose.Schema.Types.ObjectId, ref: this}]
+    thoughts: [{type: Schema.Types.ObjectId, ref: 'Thought'}],
+    friends: [{type: Schema.Types.ObjectId, ref: 'User'}],
+
+},
+{
+    toJSON: {
+        virtuals: true
+    },
+    id: false,
 })
 
-const User = mongoose.model('User', userSchema);
+userSchema.virtual('friendCount').get(function() {
+    return this.friends.length
+})
+const User = model('User', userSchema);
 
 module.exports = User;
