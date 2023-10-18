@@ -18,7 +18,7 @@ const reactionSchema = new Schema({
         type: Date,
         default: Date.now,
         //go back to this to test
-        get: (date) => { return date.split("T")[0]
+        get: (date) => { return date
         }
     },
 

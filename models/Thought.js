@@ -12,7 +12,7 @@ const thoughtSchema = new Schema({
         type: Date,
         default: Date.now,
         //go back to this to test
-        get: (date) => { return date.split("T")[0]
+        get: (date) => { return date.toString()
         }
     },
     username: {
@@ -30,8 +30,13 @@ const thoughtSchema = new Schema({
 })
 
 thoughtSchema.virtual('reactionCount').get(function () {
-    return this.reactions.length
+    if(this.reactions){
+       return this.reactions.length 
+    }else {
+        return 0
+    }
+    
 })
-const Thought = model('thought', thoughtSchema);
+const Thought = model('Thought', thoughtSchema);
 
 module.exports = Thought;

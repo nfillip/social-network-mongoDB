@@ -28,8 +28,9 @@ const getSingleUser = async (req, res) => {
   try {
     const singleUser = await User.findOne({
       _id: req.params.userId,
-    });
-    // .populate('thoughts')
+    })
+    .populate('friends')
+    .populate('thoughts')
 
     if (!singleUser) {
       return res.status(404).json({ message: "No user with that ID" });
@@ -67,11 +68,9 @@ const deleteSingleUser = async (req, res) => {
     if (!deleteUser) {
       return res.status(404).json({ message: "No user with that ID" });
     }
-    res
-      .status(200)
-      .json({
-        message: `User of id ${req.params.userId} deleted successfully`,
-      });
+    res.status(200).json({
+      message: `User of id ${req.params.userId} deleted successfully`,
+    });
   } catch (err) {
     res.status(500).json(err);
     console.error(err);
@@ -80,20 +79,36 @@ const deleteSingleUser = async (req, res) => {
 
 const addFriend = async (req, res) => {
   try {
-    // const getCurrentFriends = await User.find({
-    //   _id: { $eq: req.params.userId },
-    // });
-    // console.log(getCurrentFriends[0].friends);
-    // res.json("hey");
     const updateUserFriend = await User.findOneAndUpdate(
-        {_id: req.params.userId},
-        {$set: {friends: req.params.friendId}},
-        {new: true}
-    )
-    if(!updateUserFriend){
-        return res.status(404).json({message: 'No User with that ID'})
+      { _id: req.params.userId },
+      { $push: { friends: req.params.friendId } },
+      { new: true }
+    );
+    if (!updateUserFriend) {
+      return res.status(404).json({ message: "No User with that ID" });
     }
     res.status(200).json(updateUserFriend);
+  } catch (err) {
+    res.status(500).json(err);
+    console.error(err);
+  }
+};
+
+const removeFriend = async (req, res) => {
+  try {
+    const removeUserFriend = await User.findOneAndUpdate(
+      { _id: req.params.userId },
+      { $pull: { friends: req.params.friendId } },
+      { new: true }
+    );
+    if (!removeUserFriend) {
+      return res.status(404).json({ message: "No User with that ID" });
+    }
+    res
+      .status(200)
+      .json({
+        message: `Friend of id ${req.params.friendId} deleted successfully from ${req.params.userId}`,
+      });
   } catch (err) {
     res.status(500).json(err);
     console.error(err);
@@ -106,4 +121,5 @@ module.exports = {
   updateSingleUser,
   deleteSingleUser,
   addFriend,
+  removeFriend,
 };
