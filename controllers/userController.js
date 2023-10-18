@@ -3,6 +3,7 @@ const User = require("../models/User");
 //get users to display make they're working
 
 //create one user
+//http:locahost:3001/api/users
 const createUser = async (req, res) => {
   try {
     const newUser = await User.create(req.body);
@@ -14,6 +15,7 @@ const createUser = async (req, res) => {
 };
 
 //get all users
+//http:locahost:3001/api/users
 const getUsers = async (req, res) => {
   try {
     const getAllUsers = await User.find();
@@ -24,6 +26,7 @@ const getUsers = async (req, res) => {
 };
 
 //get single user
+//http://localhost:3001/api/users/{userId}
 const getSingleUser = async (req, res) => {
   try {
     const singleUser = await User.findOne({
@@ -43,6 +46,7 @@ const getSingleUser = async (req, res) => {
 };
 
 //update single user
+//http://localhost:3001/api/users/{userId}
 const updateSingleUser = async (req, res) => {
   try {
     const updateUser = await User.findOneAndUpdate(
@@ -60,6 +64,8 @@ const updateSingleUser = async (req, res) => {
   }
 };
 
+//delete single user
+//http://localhost:3001/api/users/{userId}
 const deleteSingleUser = async (req, res) => {
   try {
     const deleteUser = await User.findOneAndDelete({
@@ -77,6 +83,8 @@ const deleteSingleUser = async (req, res) => {
   }
 };
 
+//add a friend to a user
+//http://localhost:3001/api/users/{userId}
 const addFriend = async (req, res) => {
   try {
     const updateUserFriend = await User.findOneAndUpdate(
@@ -94,6 +102,8 @@ const addFriend = async (req, res) => {
   }
 };
 
+//remove a friend from user
+//http://localhost:3001/api/users/{userId}
 const removeFriend = async (req, res) => {
   try {
     const removeUserFriend = await User.findOneAndUpdate(
@@ -114,6 +124,8 @@ const removeFriend = async (req, res) => {
     console.error(err);
   }
 };
+
+//export to routes/api/userRoutes.js
 module.exports = {
   createUser,
   getUsers,

@@ -1,9 +1,10 @@
-const {Schema} = require('mongoose');
 
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema
 const reactionSchema = new Schema({
     reactionId: {
         type: Schema.Types.ObjectId,
-        default: () => new Types.ObjectId()
+        default: new mongoose.Types.ObjectId()
     },
     reactionBody: {
         type: String, 
@@ -18,7 +19,7 @@ const reactionSchema = new Schema({
         type: Date,
         default: Date.now,
         //go back to this to test
-        get: (date) => { return date
+        get: (date) => { return date.toString()
         }
     },
 

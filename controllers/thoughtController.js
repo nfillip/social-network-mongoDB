@@ -1,9 +1,10 @@
-//create user
+//require models
 const User = require("../models/User");
 const Thought = require("../models/Thought")
-//get users to display make they're working
+
 
 //create one user
+//http://locahost:3001/api/thoughts
 const createThought = async (req, res) => {
   try {
     const newThought = await Thought.create(req.body);
@@ -20,6 +21,7 @@ const createThought = async (req, res) => {
 };
 
 //get all thoughts
+//http://locahost:3001/api/thoughts
 const getAllThoughts = async (req,res) => {
     try {
         const allThoughts = await Thought.find();
@@ -31,6 +33,7 @@ const getAllThoughts = async (req,res) => {
  }
 
  //get single thought by id
+ //http://localhost:3001/api/thoughts/{thoughtId}
  const getSingleThought = async (req, res) => {
   try {
     const singleThought = await Thought.findOne({
@@ -47,6 +50,7 @@ const getAllThoughts = async (req,res) => {
 };
 
 // //update single thought
+//http://localhost:3001/api/thoughts/{thoughtId}
 const updateSingleThought = async (req, res) => {
   try {
     const updateThought = await Thought.findOneAndUpdate(
@@ -65,6 +69,7 @@ const updateSingleThought = async (req, res) => {
 };
 
 //delete a single thought
+//http://localhost:3001/api/thoughts/{thoughtId}
 const deleteSingleThought = async (req, res) => {
   try {
     const deleteThought = await Thought.findOneAndDelete({
@@ -83,6 +88,7 @@ const deleteSingleThought = async (req, res) => {
 };
 
 //create a reaction
+//http://localhost:3001/api/thoughts/:thoughtId/reactions/:reactionId
 const createReaction = async (req, res) => {
   try {
     const updateThoughtReaction = await Thought.findOneAndUpdate(
@@ -101,6 +107,7 @@ const createReaction = async (req, res) => {
 };
 
 //delete a reaction
+//http://localhost:3001/api/thoughts/:thoughtId/reactions/:reactionId
 const removeReaction = async (req, res) => {
   try {
     const {thoughtId, reactionId} = req.params
@@ -122,6 +129,8 @@ const removeReaction = async (req, res) => {
     console.error(err);
   }
 };
+
+//exports to api/thoughtRoutes.js
 module.exports = {
   createThought,
   getAllThoughts,
